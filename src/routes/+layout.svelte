@@ -4,6 +4,7 @@
 	let { children, data } = $props();
 
 	let { cart } = $derived(data);
+
 </script>
 
 <svelte:head>
@@ -12,6 +13,10 @@
 </svelte:head>
 
 <a href="#main" class="sr-only">Skip to main content</a>
+{#await cart then data}
+	<pre>{JSON.stringify(data)}</pre>
+{/await}
+
 <main id="main">
 	{@render children()}
 </main>

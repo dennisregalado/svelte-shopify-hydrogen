@@ -10,6 +10,7 @@ declare global {
 			session: Session;
 			storefront: Storefront;
 			cart: HydrogenCart;
+			customerAccount: CustomerAccount;
 		}
 		
 		interface PageData {
