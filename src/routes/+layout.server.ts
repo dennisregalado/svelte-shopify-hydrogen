@@ -6,8 +6,9 @@ import {
 	PUBLIC_CHECKOUT_DOMAIN
 } from '$env/static/public';
 
-export const load = async ({ locals: { storefront, cart } }) => {
+export const load = async ({ locals: { storefront, cart, customerAccount } }) => {
 	return {
+		isLoggedIn: customerAccount.isLoggedIn(),
 		cart: cart.get(),
 		publicStoreDomain: PUBLIC_STORE_DOMAIN,
 		shop: getShopAnalytics({

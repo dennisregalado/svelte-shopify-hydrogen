@@ -1,12 +1,12 @@
 import { getSelectedProductOptions } from '@shopify/hydrogen';
 import { error } from '@sveltejs/kit';
+import type { ProductQuery } from '$storefrontapi';
 
 export const load = async ({ params: { handle }, request, locals: { storefront } }) => {
 	const [{ product }] = await Promise.all([
 		storefront.query(PRODUCT_QUERY, {
 			variables: { handle, selectedOptions: getSelectedProductOptions(request) }
 		})
-		// Add other queries here, so that they are loaded in parallel
 	]);
 
 	if (!product?.id) {

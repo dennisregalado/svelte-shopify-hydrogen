@@ -7,7 +7,7 @@
 		CartLineUpdateInput,
 		CartSelectedDeliveryOptionInput,
 		Scalars
-	} from '@shopify/hydrogen-react/dist/types/storefront-api-types';
+	} from '@shopify/hydrogen-react/storefront-api-types';
 
 	type OtherFormData = {
 		[key: string]: unknown;

@@ -13,11 +13,6 @@ export default {
 				'./src/**/*.{ts,svelte}',
 				'!./src/lib/graphql/customer-account/*.{ts,svelte}'
 			]
-		},
-		'customeraccountapi.generated.d.ts': {
-			preset,
-			schema: getSchema('customer-account'),
-			documents: ['./src/lib/graphql/customer-account/*.{ts,svelte}']
 		}
 	}
 } as CodegenConfig;

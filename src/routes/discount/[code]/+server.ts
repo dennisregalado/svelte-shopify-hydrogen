@@ -24,7 +24,7 @@ export async function GET({ url, params, locals, setHeaders }) {
 	const result = await cart.updateDiscountCodes([code]);
 	const headers = cart.setCartId(result.cart.id);
 
-	setHeaders(Object.fromEntries(headers.entries()));
+	console.log('headers', headers, Object.fromEntries(headers.entries())); 
 
 	// Using set-cookie on a 303 redirect will not work if the domain origin have port number (:3000)
 	// If there is no cart id and a new cart id is created in the progress, it will not be set in the cookie

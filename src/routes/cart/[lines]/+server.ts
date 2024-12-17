@@ -60,7 +60,7 @@ export const GET = async ({ params, locals: { cart }, request, setHeaders }) => 
 
 	// redirect to checkout
 	if (cartResult.checkoutUrl) {
-		setHeaders(Object.fromEntries(headers.entries()));
+		console.log('headers', headers, Object.fromEntries(headers.entries())); 
 
 		redirect(307, cartResult.checkoutUrl);
 	} else {

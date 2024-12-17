@@ -1,5 +1,5 @@
 import { CartForm, type CartQueryDataReturn } from '@shopify/hydrogen';
-import { json, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 
 export const load = async ({ parent }) => {
@@ -9,7 +9,7 @@ export const load = async ({ parent }) => {
 };
 
 export const actions = {
-	default: async ({ request, locals: { cart }, setHeaders }) => {
+	default: async ({ request, locals: { cart }, cookies }) => {
 		const formData = await request.formData();
 
 		const { action, inputs } = CartForm.getFormInput(formData);
@@ -67,9 +67,15 @@ export const actions = {
 		const cartId = result?.cart?.id;
 		const headers = cartId ? cart.setCartId(result.cart.id) : new Headers();
 
-		setHeaders(Object.fromEntries(headers.entries()));
+		console.log('headers', headers);
+
+		const newCartId = headers.get('Set-Cookie')?.split(';')[0].split('=')[1];
+
+		console.log('newCartId', newCartId);
 
 		const { cart: cartResult, errors, warnings } = result;
+
+		cookies.set('cartId', newCartId, { path: '/' });
 
 		const redirectTo = formData.get('redirectTo') ?? null;
 
@@ -77,13 +83,13 @@ export const actions = {
 			redirect(303, redirectTo);
 		}
 
-		return json({
+		return {
 			cart: cartResult,
 			errors,
 			warnings,
 			analytics: {
 				cartId
 			}
-		});
+		};
 	}
 };
